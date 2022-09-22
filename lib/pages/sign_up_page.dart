@@ -1,17 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_clone/pages/sign_up_page.dart';
-import 'package:instagram_clone/widgets/bottom_navbar.dart';
+import 'package:instagram_clone/pages/login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const routeName = "/login-screen";
-  const LoginScreen({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  static const routeName = "/sign-up-page";
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpPageState extends State<SignUpPage> {
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -21,6 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    nameController.dispose();
+    emailController.dispose();
     userNameController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -36,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.symmetric(horizontal: 10),
           children: [
             SizedBox(
-              height: 150,
+              height: 100,
             ),
 
             Image.asset(
@@ -44,6 +47,68 @@ class _LoginScreenState extends State<LoginScreen> {
               width: 100,
             ),
 
+            TextFormField(
+              controller: nameController,
+              style: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.w500),
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.grey, width: 0.6)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.grey, width: 1)),
+                  filled: true,
+                  fillColor: const Color(0xffe6e6e6).withOpacity(0.4),
+                  contentPadding: const EdgeInsets.only(left: 10),
+                  focusColor: Colors.white,
+                  hintText: "Enter your full name",
+                  hintStyle: TextStyle(
+                      color: Colors.grey, fontWeight: FontWeight.normal),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10))),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'This field must not be empty';
+                } else {
+                  return null;
+                }
+              },
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            TextFormField(
+              controller: emailController,
+              style: const TextStyle(
+                  color: Colors.black, fontWeight: FontWeight.w500),
+              decoration: InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.grey, width: 0.6)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.grey, width: 1)),
+                  filled: true,
+                  fillColor: const Color(0xffe6e6e6).withOpacity(0.4),
+                  contentPadding: const EdgeInsets.only(left: 10),
+                  focusColor: Colors.white,
+                  hintText: "Enter your email",
+                  hintStyle: TextStyle(
+                      color: Colors.grey, fontWeight: FontWeight.normal),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10))),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'This field must not be empty';
+                } else {
+                  return null;
+                }
+              },
+            ),
+            SizedBox(
+              height: 15,
+            ),
             TextFormField(
               controller: userNameController,
               style: const TextStyle(
@@ -75,13 +140,12 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(
               height: 15,
             ),
-
             // todo this is password textField section
             TextFormField(
               obscureText: _isObscure,
               controller: passwordController,
               style:
-                  TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+              TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -119,18 +183,9 @@ class _LoginScreenState extends State<LoginScreen> {
               },
             ),
             SizedBox(
-              height: 10,
+              height: 50,
             ),
-            Align(
-                alignment: Alignment.topRight,
-                child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "forgot password?",
-                    ))),
-            SizedBox(
-              height: 15,
-            ),
+
 
             SizedBox(
               height: 45,
@@ -143,85 +198,45 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(10))),
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
-                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> const BottomNavBar()));
+                      //    Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
                     }
                   },
                   child: Text(
-                    "Sign In",
+                    "Sign Up",
                     style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                   )),
             ),
 
-            SizedBox(
-              height: 25,
-            ),
 
-            TextButton.icon(
-                onPressed: () {},
-                icon: Image.asset(
-                  "assets/images/facebook_logo.png",
-                  height: 27,
-                  width: 27,
-                  fit: BoxFit.cover,
-                ),
-                label: Text("Log in with facebook")),
+
 
             SizedBox(
-              height: 25,
-            ),
-
-            Text(
-              "OR",
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey),
-            ),
-            SizedBox(
-              height: 25,
+              height: 40,
             ),
             RichText(
               textAlign: TextAlign.center,
               text: TextSpan(children: [
                 TextSpan(
-                  text: 'You have no account? ',
+                  text: 'You have a account? ',
                   style: TextStyle(
                     color: Colors.black,
                   ),
                 ),
                 TextSpan(
-                    text: ' Sign UP',
+                    text: ' Sign In',
                     style: TextStyle(
                         color: Colors.blue, fontWeight: FontWeight.w500),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                          Navigator.pushNamed(context, SignUpPage.routeName);
+                        Navigator.pushNamed(context, LoginScreen.routeName);
                       }),
               ]),
             ),
-            SizedBox(
-              height: 70,
-            ),
 
-
-            BottomAppBar(
-              color: Colors.transparent,
-              elevation: 0,
-              child: Column(
-                children: [
-                  Divider(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      "Instagram from meta",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
+
     );
   }
 }

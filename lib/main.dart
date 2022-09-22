@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/pages/login_screen.dart';
+import 'package:instagram_clone/pages/sign_up_page.dart';
 import 'package:instagram_clone/pages/splash_screen.dart';
 
 void main() {
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.routeName : (context) => const SplashScreen(),
         LoginScreen.routeName : (context) => const LoginScreen(),
+        SignUpPage.routeName : (context) =>  SignUpPage(),
       },
     );
   }
